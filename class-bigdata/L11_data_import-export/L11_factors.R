@@ -4,14 +4,15 @@
 ## the levels argument defines the attribute
 
 eyes <- factor(x = c("blue", "green", "green"),
-               levels = c("blue", "brown", "green")
+               levels = c("blue", "brown", "green")#specified levels
                )
 
 ## when we inspect the object
-eyes
+eyes #gets prionted as the original data set
 
 ## however its internal representation can be visualise with
-unclass(eyes)
+unclass(eyes) #see the internal representation of it, you get a vector of a certain amount of elements with the elements below
+#you always have the level represented but they can also not be expressed mby 
 
 
 ## import a dataset
@@ -30,12 +31,12 @@ levels(factorData$base)
 
 ## by default they are ordered alphabetically
 
-## REORDER levels
+## REORDER levels, you plot it, aes for mapping the variable into the x or y of your plot
 
 ggplot(factorData, aes(x=base, y=counts))+
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity")#geom is independent from your aesthetic, like scatter plot, histogram
 
-## to help visualising trends and relationshipcs, the factors 
+## to help visualising trends and relationships, the factors 
 ## should follow the order of data
 
 factorData %>%

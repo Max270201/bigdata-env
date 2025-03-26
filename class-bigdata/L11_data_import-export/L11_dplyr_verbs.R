@@ -6,7 +6,7 @@ babynames = readRDS(url("https://raw.githubusercontent.com/lescai-teaching/class
 babynames
 
 
-select(babynames, name, prop)
+select(babynames, name, prop) #used to select columns by name, in this case 2 
 
 
 ###################
@@ -14,31 +14,31 @@ select(babynames, name, prop)
 ###################
 
 
-### select range of columns
+### select range of columns, when you have many of them and don t want to type all of em
 
-select(babynames, name:prop)
+select(babynames, name:prop) #from column name to column prop
 
 select(babynames, year:n)
 
 
 ### select except
 
-select(babynames, -c(sex,n))
+select(babynames, -c(sex,n)) #removes a column
 
 
 ### select with match
 
-select(babynames, starts_with("n"))
+select(babynames, starts_with("n")) 
 
 
 
 ###################
-## FILTER
+## FILTER is used to filter rows depending on the values of one or more variables, after it you only get those rows
 ###################
 
-filter(babynames, name == "Garrett")
+filter(babynames, name == "Garrett") #double equal is a boulean condition, more like a question
 
-filter(babynames, prop >= 0.08)
+filter(babynames, prop >= 0.08) #same condition
 
 ## filter extracts rows that meet every logical criteria
 
@@ -46,7 +46,7 @@ filter(babynames, name == "Garrett", year == 1880)
 
 
 ###################
-## ARRANGE
+## ARRANGE reorders rows according to one o rmore variables
 ###################
 
 
@@ -54,7 +54,7 @@ babynames %>%
   arrange(n)
 
 
-## inverting the order
+## inverting the order, through descending
 
 babynames %>% 
   arrange(desc(n))
@@ -76,4 +76,8 @@ babynames %>%
     nname = n_distinct(name)
     )
 
+?summarise()
 
+
+
+babynames 

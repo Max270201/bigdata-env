@@ -68,8 +68,13 @@ z_score = (joe - pop_mean) / pop_sd
 ## the p-value is then calculated as the proportion of probability
 ## equal or above the z-score of our single measure
 ## on a default normal distribution (i.e. mean = 0 and sd = 1)
+##pnorm gives you cumulative probability, in this case is related to the zscore
 
 pnorm(z_score, lower.tail = FALSE)
+
+##0,10 just based, means that the prob of having this event is 10%ish
+
+##pnorm to get the cumulative distr of the standard distr, in this case of all values above 30
 
 
 ## roughly it still represents the proportion we have seen above
@@ -93,13 +98,13 @@ zcalc <- function(x){
 
 
 ## create a tibble with real scores (not their probability)
-## drawn out of the same normal distribution
+## drawn out of the same normal distribution, from a random sample and get the z score for each of these
 
 exam_sample = tibble(
   scores = rnorm(2000, mean = pop_mean, sd = pop_sd)
 ) %>%
   mutate(
-    zscore = zcalc(scores) ## then we calculate the z-score of each exam score
+    zscore = zcalc(scores) ## then we calculate the z-score of each exam score (out of 2k)
   ) %>%
   arrange(zscore)
 
@@ -107,7 +112,7 @@ exam_sample = tibble(
 
 zplot = ggplot(exam_sample)+
   geom_bar(aes(x=zscore), stat = "density")+
-  geom_vline(xintercept = z_score, col = "red")
+  geom_vline(xintercept = z_score, col = "red")##on Joe's zscore
 
 plot(zplot)
 
