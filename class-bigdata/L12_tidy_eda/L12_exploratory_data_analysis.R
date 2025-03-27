@@ -3,7 +3,7 @@
 ## we can load internal datasets with
 data("diamonds")
 
-## let's inspect the dataset
+## let's inspect the dataset, shipped with tidyverse. you get a bunch of shit in a table
 diamonds
 
 
@@ -12,7 +12,7 @@ diamonds
 ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut))
 
-## or we can look at the counts, use a shortcut function
+## or we can look at the counts, use a shortcut function, the fuck is a bin?
 
 diamonds %>% 
   count(cut)
@@ -31,7 +31,7 @@ ggplot(data = diamonds) +
 ## one can do this with the data using the function cut_width()
 
 diamonds %>% 
-  count(cut_width(carat, 0.5))
+  count(cut_width(carat, 0.5)) #takes the continous variable and chops it in intervals
 
 ## the grouping variable has become a factor with range intervals
 
@@ -42,7 +42,7 @@ unusual <- diamonds %>%
   select(price, x, y, z) %>%
   arrange(y)
 
-unusual
+unusual #save some diamond with those stats in this object
 
 ## so we might want to decide to 
 

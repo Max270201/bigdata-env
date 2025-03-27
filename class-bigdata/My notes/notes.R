@@ -109,11 +109,29 @@ levels= the ordered list of unique values the categories can have (you can choos
 
 
 SEE CODES:
+  
+  
+DPLYR pack
+see some functions
 
 
+27/03
+how to create tibbles with another way -> tribble
+and how to join tables
 
+TIDY DATA AND EXPLORATIVE DATA ANALYSIS
 
+tidy if each variable has its own column and each case/record has its own row, each value its own cell
+i.e diameter of the cell measured, entity is always diameter so only need 1 column
+never put blank spaces in names, cause it refers to separation of 2 objects
 
+WHAT IS EDA?
+exploratory data analysis, it usually sparks more questions than anything
+
+-varaitions within the variable, like spread, differences in groups, causse a variable HAS to be different accross multiple samplings
+-covariation, if 2 variables are highly correlated then you could use either of them to describe the same thing
+
+so when do you decide to remove one or another?
 
 
 

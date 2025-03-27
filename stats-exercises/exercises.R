@@ -27,10 +27,46 @@ dataHappyness = readRDS(url("https://raw.githubusercontent.com/lescai-teaching/c
 
 
 
+ggplot(dataHappyness, aes(y=serotonin_level, fill=happyness))+
+  geom_boxplot()+
+  coord_flip()
+
+ggplot(dataHappyness, aes(y=endorphin_level, fill=happyness))+
+  geom_boxplot()+
+  coord_flip()
+
+
+
+
+serotonin_happyness_observed = dataHappyness %>%
+  specify(serotonin_level ~ happyness) %>%
+  calculate(stat = "diff in means", order = c("rarely_happy", "usually_happy"))
+
+serotonin_happyness_null_empirical = dataHappyness %>%
+  specify(serotonin_level ~ happyness) %>%
+  hypothesise(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("rarely_happy", "usually_happy"))
+
+serotonin_happyness_null_empirical %>%
+  visualise()+
+  shade_p_value(serotonin_happyness_observed,
+                direction = "two-sided")
+
+serotonin_p_value_happyness = serotonin_happyness_null_empirical %>%
+  get_p_value(obs_stat = serotonin_happyness_observed,
+              direction = "two-sided")
+serotonin_p_value_happyness
+
 t_test(x = dataHappyness, 
-       formula = sugar ~ individual_group, 
-       order = c("case", "control"),
-       alternative = "two-sided")+6
+       formula = serotonin_level ~ happyness, 
+       order = c("rarely_happy", "usually_happy"),
+       alternative = "two-sided")
+
+
+
+##EXERCISE 3
+dataCytofluorimeter = readRDS(url("https://raw.githubusercontent.com/lescai-teaching/class-bigdata-2023/main/L10_stats_exercises/exercise_03/L10_dataset_exercise03.rds"))
 
 
 
@@ -38,5 +74,28 @@ t_test(x = dataHappyness,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##EXERCISE 4
+dataReactor = readRDS(url("https://raw.githubusercontent.com/lescai-teaching/class-bigdata-2023/main/L10_stats_exercises/exercise_04/L10_dataset_exercise04.rds"))
 
 
