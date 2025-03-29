@@ -42,15 +42,16 @@ when you compare your test with reality:
   type 1 or false positive: reject H0 (cause your result is in line with the Ha but the H0 is still true, and you reject it)
   type 2 or false negative: accept H0 (for your test) but it is infact false (you lack some things for the whole picture)
   
-Hypo rejection
-pvalue region is where H0 is true (you accept it), the blue one
 
-multiple tests:
-  cause you re doing multiple hypotheses
+MULTIPLE TESTS:
+cause you re doing multiple hypotheses for multiple tests ran 
+total hypo <- m
+total true H0 <- m0
+total false H0 <- m-m0
 
 family wise error rate:
   chance of getting a false positive out of your multiple hypo
-(1-alpha)^m0 is the chance that you don t reject any H0   m0=total sample
+(1-alpha)^m0 is the chance that you don t reject any H0   
 
 i.e you re looking for a relative, you have a database of 800k people and an error of 1e6
 you get a 55% chance of getting at least one wrong match
@@ -65,11 +66,63 @@ worst possible scenario, way too harsh as a correction
 Benjamini_Hochberg:estimates what the family error rate could be
 
 Q-Q plot:visual inspection of tests results
-order p values from smallest to highest, I think you expect to have one pvalue per quantile
-it shows you how much you differ from the normal distr, you either have a lot of significance values (many false pos)
-or too few (less than what is expected)
+quantile divides the data into equal groups, in a normal distr it means that each group has elements that have the same probability of observing a value
+start plotting
+y axis: your data set quantile
+x axis: your normal distr quantile (they are different)
 
-you geta  straight line that comrpises all your expected values
+a straight line would be the ideal distribution for your quantiles (in said disttribution), the more your actual values differ from it, 
+the more likely it is that your data isn t normally distributed
+
+for the normal distr quantile: you divide each sample quantile by the number of p values for the normal distr
+
+in a normal distribution your slope should be linear, if you use a q-q plot you can see how much your data fits into it
+above the line: too much or too few significance values (false positives in the former and no good test for the latter)
+
+
+SIMULATION DESIGN
+5020 variants (genetical, not statistics), where 5000 thousand were neutral, 20 were related to the disease
+simulate 1000 controls and 1000 cases (each one with 5020 variants tested)
+10,038,000 data points
+calculated the p value for each value (for the association disease)
+
+always test for multiple tests, but be careful when applying correction methods (Bonf and BH)
+
+
+INFER WORKFLOW
+every time you take a sample out of your pop you will always have different estimates
+
+RESAMPLING PROCEDURES: 
+
+Bootstrapping: taking, out of a single population, multiple samples and for each of them you take the statistics that you want and distribute them
+to get the confidence interval (resampling from a larger pop)
+you can use the same samples over and over
+i.e enrichment analysis, general pop = all genes in genome, each time you get a sample that can contain similar elememts (good for p-value)
+
+Permutation: random shaffling of your sample and each time you get a randomic sample, plot them + you original sample and get the 
+p-vakue out of that (resampling from the same sample, just shaffling the labels.
+here you can t resample the same sample over and over again, good fro qhen you don t have a large pop to work with
+you re not estimating shit out of the general population, you can just estimate things out of that sample
+each time you have the SAME ELEMENTS, you just changes the gìthings they are associated to (no replacement)
+
+remember: frequency is out of your sample (can be measured) distribution is osmething of the general population
+that you try to obtain 
+
+
+empirical distribution: is when you create your own distr out of your data, you create a null distr that represents the characteristics 
+of your own data, so you don t have to choose a theoretical distr that could fit your data
+
+SEE HOW YOU CREATE A NULL DISTRIBUTION
+you started with a starting test statistics and you created your own null distribution out of it 
+
+
+WORKFLOW
+infer is a tidyverse package
+take data, specify() to descibe relationship with your hypothesis, generate null hypothesis (H0), generate() the empirical distr
+calculate() to use the test statistics (out of sample or out of each of the permutations), visualize and get p-value
+
+infer has an easier language. response = dependent variable, outcome  explanatory = independent, generates the responde variable
+
 
 
 26/03
@@ -131,7 +184,7 @@ exploratory data analysis, it usually sparks more questions than anything
 -varaitions within the variable, like spread, differences in groups, causse a variable HAS to be different accross multiple samplings
 -covariation, if 2 variables are highly correlated then you could use either of them to describe the same thing
 
-so when do you decide to remove one or another?
+so when do you decide to remove one or another? if you re doing an extremely fine analysis then you could consider using them both
 
 
 
