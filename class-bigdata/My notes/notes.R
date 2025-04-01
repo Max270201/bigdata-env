@@ -186,5 +186,76 @@ exploratory data analysis, it usually sparks more questions than anything
 
 so when do you decide to remove one or another? if you re doing an extremely fine analysis then you could consider using them both
 
+1/04
+DATAMODELING
+
+a model is a tool tha describes something, a system with variables. Inferential statistics (alr done)is based on models
+through package infer
+predictive model uses your data to make predictions on it, package tidymodels.
+
+you can use tests to check how your model predicts things based on your data (anova)
+
+SUPERVISED: outcome variable (means that guides you, gives you instructions ecc). In this case the outcome is the supervisor
+they describe how the model generates outcomes, according to the nature of the out. i.e linear regression
+
+-regression: predict a numeric outcome. regression as i... you will see
+- classificarion: categorical outcome (ordered or not)
+
+
+
+
+UNSUPERVISED: no outcome, no supervisor. They don t predict much, they just realaborate what you already have 
+i.e PCA, means clustering
+
+
+
+back to data life cycle, now we are at the modeling part
+
+modeling process follow these steps:
+EDA exploratory data analysis -> feature engineering (anything you do to tranform your data)
+model tuning (polishes parameters of the model in a systematic way)
+evaluation that check how good the model is in predicting.
+
+OVERFITTING: means that your model is way too good on just the data you are working with, and does shit with other data, there are ways to check it
+by tuning it on random sets of data
+
+
+DATA SPENDING
+treat it like a budget, with a training + validation (builds the model) and keep aside some of it to test it
+the more you train the more you overfit, that s why you have the testing data, and it has to be done ONLY AT THE VERY END
+cause your model will be finished 
+
+STRUCTURE OF THE MODEL
+type, then engine (the mathematical methods you use to solve the equations), mode (the purpose of the model, like classification or regression)
+model fitting (done with training data) and use it to make predictions on the testing data, then you can have evaulation scores to
+see how your model does with your data (thanks to the testing data)
+
+
+FITTING MODEL
+
+linear regression on data, the fitting is finding the line that best gets close to the data you have
+(general equation -> fit into an equation with numerical parameters that try to fit your data, with num parameters)
+give me an examle of a model: use an equation and substitute the numbers, predictors are like the independent variables
+
+why is it a supervised model? you want to get a certain x value, and you already have both the REAL y (the actual value from your sample)
+and the predicted Y (the one that should lay on the fitting model). You can also chek the residual, which is the difference between the real and fitted Y)
+
+DECISION TREE: splits data according to every decision you make, random cause you have randomly set up predictors according to how many you have (and make a final classification prediction)
+
+
+DATA SPENDING: initial split to set the criteria with which you will split your data and then trainign and testing
+verbs:
+  type(of your data), it means one function that correspond to the type of model you are choosing, you substitute the type with your function
+  set_engine
+  set_mode
+  
+
+  check R
+  
+
+
+
+
+
 
 
