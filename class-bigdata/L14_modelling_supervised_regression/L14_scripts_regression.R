@@ -17,7 +17,7 @@ enzyme_testing = testing(enzyme_split)
 
 
 ########################
-# LINEAR REGRESSION ####
+# LINEAR REGRESSION ####you don t need mode cause it is a regression by default
 ########################
 
 ### define the mathematical structure
@@ -30,7 +30,7 @@ lm_model <-
 ## fit the model, by defining the relationship
 ## between the variables
 
-enzyme_lm_formula_fit <-
+enzyme_lm_formula_fit <- #fit accepts the product as ???
   lm_model %>% 
   fit(product ~ ., data = enzyme_training)
 
@@ -54,17 +54,17 @@ enzyme_lm_formula_fit %>% extract_fit_engine()
 tidy(enzyme_lm_formula_fit)
 
 
-enzyme_lm_prediction = enzyme_lm_formula_fit %>%
+enzyme_lm_prediction = enzyme_lm_formula_fit %>% #bind prediction to testing dataset
   predict(enzyme_testing) %>%
   bind_cols(enzyme_testing)
 
 
 enzyme_lm_prediction %>%
   ggplot(aes(x=product, y=.pred))+
-  geom_point(alpha = 0.4, colour = "blue")+
-  geom_abline(colour = "red", alpha = 0.9)
+  geom_point(alpha = 0.4, colour = "blue")+ #alpha is transparency of your colour
+  geom_abline(colour = "red", alpha = 0.9) 
 
-
+#prediction doen t work well, you see how at low concs you get shitty predc, even at high values
 ########################
 # NEAREST NEIGHBOURS ###
 ########################
@@ -73,7 +73,7 @@ enzyme_lm_prediction %>%
 knn_reg_model <-
   nearest_neighbor(neighbors = 5, weight_func = "triangular") %>%
   # This model can be used for classification or regression, so set mode
-  set_mode("regression") %>%
+  set_mode("regression") %>% #cause it can work with both regression and classification
   set_engine("kknn")
 
 knn_reg_model
@@ -83,7 +83,7 @@ knn_reg_model
 enzyme_knn_formula_fit <-
   knn_reg_model %>% 
   fit(formula = product ~ temperature + substrateA + substrateB + enzymeA + enzymeB + enzymeC + eA_rate + eB_rate + eC_rate, 
-      data = enzyme_training)
+      data = enzyme_training) #doesn t do well with the tilde and dot as a shortcut
 
 
 enzyme_knn_prediction = enzyme_knn_formula_fit %>%
@@ -126,4 +126,4 @@ enzyme_rf_prediction %>%
   ggplot(aes(x=product, y=.pred))+
   geom_point(alpha = 0.4, colour = "blue")+
   geom_abline(colour = "red", alpha = 0.9)
-
+#random forest is more complex, takes more time than a linear regr

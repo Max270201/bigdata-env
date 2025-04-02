@@ -252,6 +252,68 @@ verbs:
 
   check R
   
+2/04
+
+  
+LINEAR MODEL: (predictor can generate an effect on the outcome by summing) because it s additive (straight line with multiple dimensional systems, with multiple coordinates), can be summarised with 
+NON-LINEAR: non additive terms, cause they are positioned as exponential, logaritmic.
+Interaction betweeen multiple elements (a:b means all possible combinations of these 2 values) + you could have the combined effects of summation and more complex predictors
+like when you have a good fit for the most part with a linear model but you get non linear relation towards the extreme values
+
+K-NEAREST NEIGHBOURS (KNN)
+multiple modes. you have data and want to classify it, you could classify it by relating to the closest neighbours and assume that it is the same class as the majority of its neighbours
+k= how many neigh you consider, you often don t know ehich k you have to use
+
+used for both regression and classification, it s a non parametric method because you can t rely on a distr, you just look at the closest datapoints
+
+
+RANDOM FOREST reccap
+how you get a numerical outcome when you have discrete, the more your data is split and the smoother the outcome, better with non linear data
+you need a confidence interval 
+check code
+
+
+HOW TO EVALUATE YOUR PERFORMANCE (for plot)
+mentioned the residual (loss function), your objective is to minimize it, used to calculat e performance
+
+
+MAE: mean absolute error, calculate the absolute value of the error and divide by the number of your samples
+RMSE: root mean squared error root of your squared error, divide by sample, why do you need both? here you square to give higher weight to higher residuals, extreme errors are highlighted
+RSQ: r squared score, 1 - dividing the squared error by the squared variance (i-prediction)
+
+ideal values: 0, 0, 1(cause means that your model error is the same as your sample)
+
+
+
+see reaction scheme: 3 enzymes with 3 reaction rates,2 intermediate products and 1 final product
+
+FEATURE ENGINEERING
+transforming the predictor values so is esasier to predict the relation (through the model). keep variances
+
+transformation: compute values, numerical calculations (normalisation= scaling and centering), calculate new features (done with mutate())
+Encoding: representing data, if you have 3 genotypes you could represent them through 0,1,2 (from categorical to numerical)
+
+
+NORMALIZATION (scale and center)
+a variable will have mean=0 and sd=1, not every variable is identical, you just don t compare the predictors based on THESE two aspects, so you just comoare the effct of that predictor on the outcome
+like having x (0:1) and x2 (0:1000), 
+
+centering: subtract the mean 
+scaling: center divided by sd
+
+
+
+SPLINES AND NON LINEARITY
+transform data to model the predictor with a model equation, so a variable is converted into a polynomial term
+just use the flexi and of course they won t be a perfectly linear model, you just get a good interval in which you can work with that model
+fit simpler regression model into complex data
+
+
+
+FEATURE SELECTION
+
+select which predictors to used based on your model. two variables that identically covary they will summate their effect, one of them doesn t add any additional information, you could exclude that
+
 
 
 

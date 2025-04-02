@@ -5,12 +5,11 @@ tidymodels_prefer()
 
 
 
-## model metrics
+## model metrics, 3 binding things, piping to the function matrix and check that the truth outcome is the one coming from your data and the prediction in I don't know why
 
 
 enzyme_lm_prediction %>%
-  metrics(truth = product, estimate = .pred)
-
+  metrics(truth = product, estimate = .pred) #369
 
 enzyme_knn_prediction %>%
   metrics(truth = product, estimate = .pred)
@@ -24,8 +23,8 @@ enzyme_rf_prediction  %>%
 ## evaluate differences
 
 
-compare_metrices = bind_rows(
-  bind_cols(
+compare_metrices = bind_rows( #binding rows
+  bind_cols( #calculate predictions and only metric and estimate as columns
     enzyme_lm_prediction %>%
       metrics(truth = product, estimate = .pred) %>%
       select(.metric, .estimate),

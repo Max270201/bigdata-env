@@ -1,7 +1,7 @@
 
 
 library(tidyverse)
-library(tidymodels)
+library(tidymodels)#canc reate workflows, composing different fits through recipes, which is the place where you do feature engineering
 tidymodels_prefer()
 
 
@@ -14,25 +14,25 @@ rf_model_reg <- rand_forest() %>%
   set_mode("regression") %>% 
   set_engine("ranger")
 
-## creating a recipe
-enzyme_recipe <- 
+## creating a recipe, can make an assumption of the relationship and step_to transform data, do it before fitting
+enzyme_recipe <- #saving in object
   recipe(product ~ temperature + substrateA + substrateB + enzymeA + enzymeB + enzymeC + eA_rate + eB_rate + eC_rate, 
-         data = enzyme_training) %>% 
+         data = enzyme_training) %>% #similar to fit, accepts the data and its relationship
   step_center(all_predictors()) %>% ## centre all predictors 
   step_scale(all_predictors()) ## scale all predictors
 
 
-rf_workflow <- workflow() %>% 
-  add_model(rf_model_reg) %>% 
-  add_recipe(enzyme_recipe)
+rf_workflow <- workflow() %>% #empty function and thena dd components
+  add_model(rf_model_reg) %>%  #model structure
+  add_recipe(enzyme_recipe) #recipe that yous aved in this object, kinda like piping shit 
 
 
 rf_wf_enzyme_fit <- fit(
   rf_workflow,
   enzyme_training
-)
+) #fitting
 
-enzyme_rf_wf_prediction = rf_wf_enzyme_fit %>%
+enzyme_rf_wf_prediction = rf_wf_enzyme_fit %>% #run the fit and pipe it to the predictor
   predict(enzyme_testing) %>%
   bind_cols(enzyme_testing)
 
@@ -50,7 +50,7 @@ enzyme_rf_prediction  %>%
   metrics(truth = product, estimate = .pred)
 
 ## we can see it has helped, just a little in terms of RSQ (increased) and RMSE (reduced)
-
+##in this case normalisation hasn t helped, cause of the data itself
 
 
 ########################
@@ -75,14 +75,14 @@ lm_model <-
 enzyme_recipe_nonlinear <- recipe(intermediate_a ~ ., ### note how in regression you can use a shortcut for all others
                                   data = enzyme_intermediate_training) %>% 
   step_center(all_predictors()) %>% 
-  step_scale(all_predictors()) %>%
+  step_scale(all_predictors()) %>% 
   step_interact(~ temperature:eA_rate)  %>% ## interaction term
-  step_ns(temperature, deg_free = 5) %>% ## splines for temperature
-  step_ns(eA_rate, deg_free = 5) ## splines for enzyme rate
+  step_ns(temperature, deg_free = 5) %>% ## splines for temperature, outcome depends on this interaction
+  step_ns(eA_rate, deg_free = 5) ## splines for enzyme rate, temperature and erate are not linear
 
 lm_workflow <- workflow() %>% 
   add_model(lm_model) %>% 
-  add_recipe(enzyme_recipe_nonlinear)
+  add_recipe(enzyme_recipe_nonlinear) #model is a decription of what you assume are the relationships of your variables in your dataset
 
 
 lm_wf_enzyme_fit <- fit(
@@ -98,6 +98,7 @@ enzyme_lm_wf_prediction %>%
   ggplot(aes(x=intermediate_a, y=.pred))+
   geom_point(alpha = 0.4, colour = "blue")+
   geom_abline(colour = "red", alpha = 0.9)
+#with splines you get forced lines of your variables
 
 
 enzyme_lm_wf_prediction %>% 
@@ -190,5 +191,5 @@ enzyme_reduced_prediction %>%
 
 
 ## we get a basically perfect prediction even if we used enzymeB instead of enzymeA
-
+## we were inflating the contribution of some predictors because the ones we removed were extremely highly correlated with other ones
 
