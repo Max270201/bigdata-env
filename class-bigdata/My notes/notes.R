@@ -315,6 +315,81 @@ FEATURE SELECTION
 select which predictors to used based on your model. two variables that identically covary they will summate their effect, one of them doesn t add any additional information, you could exclude that
 
 
+REVISE LECTURE 3/04
+
+
+
+8/04
+UNSUPERVISED MODELING: PCA and custering
+
+dimensionality reduction: number of variables used to describe data, high dimensional space -> many variables
+each variable is a dimension, you use dimensionality redcuction to visualise data on plot 
+you have to find the variables that vary the most,to understand the direction of your data
+
+PRINCIPAL COMPONENT ANALYSIS (PCA) a redcuction method
+
+is still a data transformation, through simple mathematical operations
+principal components are linear transformation of your data, cause you project your data on a different space
+
+find the center of your data and find a line where the projection of you data better describe the variation of the data themselves (like how they vary according to the center)
+
+this is not a linear regression, cause you are not using a method of list squared, you are maximizing the variance
+in the linear you want to minimize the difference between the outcome and the predicted value. in PCA you maximize because ???
+multiplying your vector by a scalar vector, cause you don t change its direction, just scale 
+the Eigen vector is orthogonal to all other Heigen vectors (they have correlation 0, so you capture completely different variances along these 2 lines)
+
+
+the new predictors are obtained through their original value multiplied by their weight, adn you get the new PRINCIPLE COMPONENT
+
+you start eith your original dataset, you have p predictors and n observations, you take out of p only a few of them (k), see the matrix that you get
+
+each eigen vector has a lambda that shows how mucht of the original values is represented
+
+
+CLUSTERING
+finding common properties between observations (in cases when you don t know the similarities)
+
+it adds a new categorical variable, finds something that you don t see in your data, explaining how some observations are correlated with each other
+
+-partitional: separetes the data to some axis of variation
+-hierarchical: bottom up
+-model-based: based on some kind of description of your data
+
+similarity -> distance 
+
+
+GEOMETRIC DISTANCE:
+the one that is plotted
+
+Euclidean distance -> distanza tra due punti, the more similar 2 values (points) are, the more similar they will be
+
+you have many types of distance, like Pearson that gives you how similar teh variation of the trend is
+
+
+HIERARCHICAL DISTANCE
+the closer the more similar (no shit). you form some pairs of proximity and check which pair is the most similar and add the next more similar
+single linkage: distance between 2 groups is the distance between the 2 most close elements
+complete linkage: between the 2 most distant values
+ward method: center of each group and measuring the distance between each group
+
+example. heat map
+
+
+K-MEAN CLUSTERING (remin k nearest neighbors) k for clustering, the initial k is not relevant for the final clusters
+
+from a scatter plot, place randomly some center point (centroids),you assume that in your data you have k nymber of clusters (assumption)
+
+you clusters will be formed with data points being assigned to the nearest centroid. These new clusters will have new centers and then recompute the data again and again,
+until these centroids will be closer and closer
+
+MEASURING PERFORMANCE
+within cluster sum-of-squared error (WSS) how spread the cluster is compared to its cluster
+total sum of squared errors (TSS) distance of all obs from the global centroid
+ratio wss/tss the smaller the more the data in these clusters are near each other
+
+
+
+
 
 
 
