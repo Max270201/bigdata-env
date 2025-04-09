@@ -316,8 +316,7 @@ select which predictors to used based on your model. two variables that identica
 
 
 REVISE LECTURE 3/04
-
-
+SUPERVISED MODEL
 
 8/04
 UNSUPERVISED MODELING: PCA and custering
@@ -390,8 +389,20 @@ ratio wss/tss the smaller the more the data in these clusters are near each othe
 
 
 
+9/04
+prediction model
+It could be a supervised model, correlation
+feature engineering: kinase inhibitor and gene expr in correrlation rank order
+they worked with missing concentrations and filled some gaps to join data 
+they used static datasets, no continous values for gene concentrations, so not the effect of the inhibitor to the gene expression
 
+model benchmarking, compare models with each other
 
+XGBoost and gradient:
+training is done by minimizing the loss
+learning: how much a model fits the data, how quickly it fits to the data (could lead to overfitting, too much fitting for that data, doesn t perform well with other data)
+gradient is the multidimensional complex, you get its minimum by getting a vector of all partial derivatives of all the parameters of that..
+XGBoost is a sequence of decision tree that is used to minimize the loss, used in a sequential way, optimizes and sends to another optimization tree (gradient XBoost)
 
 
 
