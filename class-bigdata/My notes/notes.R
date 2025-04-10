@@ -221,7 +221,8 @@ by tuning it on random sets of data
 
 
 DATA SPENDING
-treat it like a budget, with a training + validation (builds the model) and keep aside some of it to test it
+treat it like a budget, with a training + validation, also tests the model on unseen data (), but you validate the performance in testing
+(builds the model) and keep aside some of it to test it
 the more you train the more you overfit, that s why you have the testing data, and it has to be done ONLY AT THE VERY END
 cause your model will be finished 
 
