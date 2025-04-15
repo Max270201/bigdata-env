@@ -199,7 +199,7 @@ SUPERVISED: outcome variable (means that guides you, gives you instructions ecc)
 they describe how the model generates outcomes, according to the nature of the out. i.e linear regression
 
 -regression: predict a numeric outcome. regression as i... you will see
-- classificarion: categorical outcome (ordered or not)
+-classificarion: categorical outcome (ordered or not)
 
 
 
@@ -404,6 +404,154 @@ training is done by minimizing the loss
 learning: how much a model fits the data, how quickly it fits to the data (could lead to overfitting, too much fitting for that data, doesn t perform well with other data)
 gradient is the multidimensional complex, you get its minimum by getting a vector of all partial derivatives of all the parameters of that..
 XGBoost is a sequence of decision tree that is used to minimize the loss, used in a sequential way, optimizes and sends to another optimization tree (gradient XBoost)
+
+
+10/04 EXERCISE DAY
+penaling on linear regression, is for tuning
+
+
+15/04
+BIG DATA INFRASTRUCTURE 
+
+experimental design: to choose which tools you should use
+
+according to the number of your samples -> single, few, multi
+
+storage -> FASTQ file, something that comes from next gen sequencing, number of reads on x and the file size on y
+BAM file, original data plus some other info (mapping info,). Whole exome of the genome, you produce files of 8/10Gbs of raw sample, to align them 12Gbs
+
+HPC ARCH:
+  series of pcs separeted from each other, a cluster of pcs connected to each other. 
+  Login nodes are the ones that 
+  Storage servers, other comps that specialise in handling traffic from data from some discs to whole infrastructure
+
+
+In Pavia: eos cluster
+cuda: library for gpu computation
+tensor:array to hold data
+
+
+nodes are categorised according to
+gpu nodes
+standard notes
+fat nodes for lot of memory
+
+
+Helicon infra: much smaller than the uni one
+4 nodes with 16 cores
+
+
+
+
+classical way is data to compute: storage with files, those are copied into a machine where you want to do some sort of comp, solid state disc associated that is faster than idk what
+is not ideal cause it takes some time
+
+compute to data: you can speed up things, access to nodes directly to the storage with no copying, how to handle data traffic? special discs that scatter philes through the discs,so that you can reconstruct file and retrieve them easily
+VCF hold a list of variance (variant call format)
+
+QC quality control
+
+mark duplicates: marks the reads that are result of a dupli, either at pcr level or optical dupli (camera that detects 2 equal things)
+gets and additional BAM file
+local realignment: 
+
+splitting by reads means that after your first analysis you need to join the results together and do further analysis
+
+alignment: one sample per task
+variant calling: by genome coordinates, chromosomes for ex
+
+SCATTER-GATHER
+
+block of data that can be subset and then rejoined togehter at the end of you computations
+remember that in order to gain time you should process in parallel (no shit)
+splitting and rejoining take time by themselves
+
+
+Task orchestration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
